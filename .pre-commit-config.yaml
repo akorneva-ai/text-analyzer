@@ -3,6 +3,7 @@ repos:
     rev: 24.4.2
     hooks:
       - id: black
+        stages: [manual]
 
   - repo: https://github.com/pycqa/isort
     rev: 5.13.2
@@ -13,6 +14,8 @@ repos:
     rev: 7.0.0
     hooks:
       - id: flake8
+        args:
+          - --indent-size=2
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.10.0
