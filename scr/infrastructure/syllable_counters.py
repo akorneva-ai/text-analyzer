@@ -1,0 +1,20 @@
+class Syllable_Counter:
+
+  def count(self, word, language):
+    word = word.lower()
+    if language == 'RU':
+      vowels = 'аеёиоуыэюя'
+    elif language == 'FR':
+      vowels = 'aeiouyàâäéèêëïîôöùûüÿ'
+    elif language == 'DER':
+      vowels = 'aeiouyäöüß'
+    else:
+      vowels = 'aeiouy'
+    count = 0
+    for letter in word:
+      if letter in vowels:
+        count = count + 1
+    if count == 0:
+      count = 1
+
+    return count
