@@ -1,0 +1,13 @@
+# development tools
+pre-commit
+black
+isort
+flake8
+mypy
+
+# application dependencies
+fastapi
+pydantic
+textblob
+langdetect
+uvicorn
