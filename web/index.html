@@ -70,13 +70,11 @@
         async function analyzeText() {
 
             const text = document.getElementById("textInput").value;
-
             const resultElement = document.getElementById("result");
 
             if (!text.trim()) {
                 resultElement.innerHTML =
                     '<span class="error">Please enter some text.</span>';
-
                 return;
             }
 
@@ -88,11 +86,9 @@
                     "http://127.0.0.1:8000/analyze",
                     {
                         method: "POST",
-
                         headers: {
                             "Content-Type": "application/json"
                         },
-
                         body: JSON.stringify({
                             text: text
                         })
@@ -108,9 +104,18 @@
                 }
 
                 resultElement.textContent =
-                    `Text: ${data.text}
-Polarity: ${data.polarity}
-Subjectivity: ${data.subjectivity}`;
+                    `Language: ${data.language}
+    Flesch index: ${data.flesch_index}
+    Interpretation: ${data.interpretation}
+    Polarity: ${data.polarity}
+    Subjectivity: ${data.subjectivity}
+
+    Statistics:
+    Sentences: ${data.stats.sentence_count}
+    Words: ${data.stats.word_count}
+    Syllables: ${data.stats.syllable_count}
+    Average sentence length: ${data.stats.avg_sentence_length}
+    Average word syllables: ${data.stats.avg_word_syllables}`;
 
             } catch (error) {
 

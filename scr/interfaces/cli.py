@@ -1,6 +1,6 @@
 import click
 
-from .api import analyze_text
+from .api import analyze
 
 
 @click.group()
@@ -17,7 +17,7 @@ def cli():
     type=click.Path(exists=True),
     help="Путь к файлу с несколькими текстами"
 )
-def analyze(text, file, batch_file):
+def analyze_pro(text, file, batch_file):
     """Анализирует текст, файл или несколько текстов."""
 
     # Проверяем, что указан ровно один режим
@@ -37,7 +37,7 @@ def analyze(text, file, batch_file):
     # Анализ одного текста
     # -------------------------
     if text is not None:
-        result = analyze_text(text)
+        result = analyze(text)
 
         click.echo(f"Text: {result['text']}")
         click.echo(f"Polarity: {result['polarity']}")
@@ -50,7 +50,7 @@ def analyze(text, file, batch_file):
         with open(file, "r", encoding="utf-8") as f:
             text = f.read()
 
-        result = analyze_text(text)
+        result = analyze(text)
 
         click.echo(f"Text: {result['text']}")
         click.echo(f"Polarity: {result['polarity']}")
@@ -64,7 +64,7 @@ def analyze(text, file, batch_file):
             texts = [line.strip() for line in f if line.strip()]
 
         for i, text in enumerate(texts, start=1):
-            result = analyze_text(text)
+            result = analyze(text)
 
             click.echo(f"\n--- Text {i} ---")
             click.echo(f"Text: {result['text']}")

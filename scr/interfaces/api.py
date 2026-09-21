@@ -1,8 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
-from textblob import TextBlob
 from fastapi.middleware.cors import CORSMiddleware
 import time
+from scr.infrastructure.text_analiser import Text_Analyzer
 
 app = FastAPI()
 
@@ -38,38 +38,11 @@ class AnalyzeRequest(BaseModel):
 class BatchAnalyzeRequest(BaseModel):
     texts: list[str] = Field(..., min_length=1)
 
-
-def analyze_text(text: str):
-    try:
-        # Проверяем, что текст не состоит только из пробелов
-        if not text.strip():
-            raise HTTPException(
-                status_code=400,
-                detail="Text cannot be empty"
-            )
-
-        blob = TextBlob(text)
-
-        return {
-            "text": text,
-            "polarity": blob.sentiment.polarity,
-            "subjectivity": blob.sentiment.subjectivity
-        }
-
-    except HTTPException:
-        raise
-
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Internal server error: {str(e)}"
-        )
-
+analyzer = Text_Analyzer()
 
 @app.post("/analyze")
-def analyze(request: AnalyzeRequest):
-    return analyze_text(request.text)
-
+async def analyze(request: AnalyzeRequest):
+    return analyzer.analyze(request.text)
 
 @app.post("/analyze-batch")
 def analyze_batch(request: BatchAnalyzeRequest):
@@ -82,7 +55,7 @@ def analyze_batch(request: BatchAnalyzeRequest):
                     detail="Texts cannot contain empty strings"
                 )
 
-        return [analyze_text(text) for text in request.texts]
+        return [analyzer.analyze(text) for text in request.texts]
 
     except HTTPException:
         raise
