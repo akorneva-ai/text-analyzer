@@ -1,3 +1,11 @@
+from textblob import TextBlob
+from domain.types import Analysis_Result, Text_Stats, Language
+
+from infrastructure.language_detector import Language_Detector
+from infrastructure.syllable_counters import Syllable_Counter
+from infrastructure.flesch_calculators import Flesch_Calculator
+from infrastructure.sentiment import Sentiment_Analyzer
+
 class Text_Analyzer:
 
   def __init__(self):
@@ -26,16 +34,17 @@ class Text_Analyzer:
     polarity, mood = self.mood.analyze(text, language)
     objectivity = 100 - abs(polarity * 100)
 
-    return {
-      'language': language,
-      'sentences': sentences,
-      'words': words,
-      'syllables': syllables,
-      'avgSentence': avgSentence,
-      'avgWord': avgWord,
-      'score': score,
-      'meaning': meaning,
-      'polarity': polarity,
-      'mood': mood,
-      'objectivity': objectivity
-    }
+    return Analysis_Result(
+      language = language,
+      flesch_index = score,
+      interpretation = meaning,
+      polarity = polarity,
+      subjectivity = objectivity,
+      stats = Text_Stats(
+        sentence_count = sentences,
+        word_count = words,
+        syllable_count = syllables,
+        avg_sentence_length = avgSentence,
+        avg_word_syllables = avgWord
+      )
+    )
