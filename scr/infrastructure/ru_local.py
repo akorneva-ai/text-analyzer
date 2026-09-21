@@ -31,3 +31,4 @@ TONALITY = 'Тональность текста: '
 OBJECTIVITY = 'Объективность: '
 POLARITY = 'полярность: '
 INTERPRETATION = 'Интерпретация: '
+

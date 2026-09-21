@@ -1,12 +1,13 @@
+from domain.types import Language
 class Syllable_Counter:
 
   def count(self, word, language):
     word = word.lower()
-    if language == 'RU':
+    if language == Language.RU:
       vowels = 'аеёиоуыэюя'
-    elif language == 'FR':
+    elif language == Language.FR:
       vowels = 'aeiouyàâäéèêëïîôöùûüÿ'
-    elif language == 'DER':
+    elif language == Language.GER:
       vowels = 'aeiouyäöüß'
     else:
       vowels = 'aeiouy'

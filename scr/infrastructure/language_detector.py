@@ -1,3 +1,6 @@
+from langdetect import detect
+from domain.types import Language
+
 class Language_Detector:
 
   def detectByWords(self, text):
@@ -19,33 +22,33 @@ class Language_Detector:
         enCount = enCount + 1
 
     if derCount > frCount and derCount > enCount:
-      return 'DER'
+      return Language.GER
     elif frCount > derCount and frCount > enCount:
-      return 'FR'
+      return Language.FR
     else:
-      return 'EN'
+      return Language.EN
 
   def detect(self, text):
     for letter in text:
       if letter in 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ':
-        return 'RU'
+        return Language.RU
 
     for letter in text:
       if letter in 'àâäéèêëïîôöùûüÿ':
-        return 'FR'
+        return Language.FR
 
     for letter in text:
       if letter in 'äöüß':
-        return 'DER'
+        return Language.GER
 
     try:
       lang = detect(text)
       if lang == 'ru':
-        return 'RU'
+        return Language.RU
       if lang == 'fr':
-        return 'FR'
+        return Language.FR
       if lang == 'de':
-        return 'DER'
-      return 'EN'
+        return Language.GER
+      return Language.EN
     except:
-      return 'EN'
+      return Language.EN
