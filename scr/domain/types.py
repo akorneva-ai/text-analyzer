@@ -28,10 +28,7 @@ class Text_Stats:
 class Analysis_Result:
     language: Language
     flesch_index: float
-    flesch_kincaid: float
     interpretation: str
     polarity: Polarity
     subjectivity: float
-    lexical_diversity: float
-    rare_word_density: float
     stats: Text_Stats

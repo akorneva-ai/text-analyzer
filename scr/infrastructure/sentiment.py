@@ -1,6 +1,6 @@
-from domain.types import Language
-from domain.types import Polarity
-import ru_local as ru
+from scr.domain.types import Language
+from scr.domain.types import Polarity
+from scr.infrastructure import ru_local as ru
 
 class Sentiment_Analyzer:
 
