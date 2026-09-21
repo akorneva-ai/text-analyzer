@@ -1,4 +1,4 @@
-from domain.types import Language
+from scr.domain.types import Language
 class Syllable_Counter:
 
   def count(self, word, language):

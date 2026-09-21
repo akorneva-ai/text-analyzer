@@ -1,5 +1,5 @@
 from langdetect import detect
-from domain.types import Language
+from scr.domain.types import Language
 
 class Language_Detector:
 

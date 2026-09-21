@@ -1,5 +1,5 @@
-from domain.types import Language
-from infrastructure import ru_local as ru
+from scr.domain.types import Language
+from scr.infrastructure import ru_local as ru
 
 class Flesch_Calculator:
 
