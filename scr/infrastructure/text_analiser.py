@@ -40,6 +40,9 @@ class Text_Analyzer:
       interpretation = meaning,
       polarity = polarity,
       subjectivity = objectivity,
+      flesch_kincaid = 0.0,
+      lexical_diversity = 0.0,
+      rare_word_density = 0.0,
       stats = Text_Stats(
         sentence_count = sentences,
         word_count = words,
